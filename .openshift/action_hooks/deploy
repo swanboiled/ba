@@ -13,7 +13,7 @@ fi
 echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/myproject/manage.py migrate --noinput'"
 # GETTING-STARTED: change 'myproject' to your project name:
 
-python "$OPENSHIFT_REPO_DIR"wsgi/myproject/manage.py make migrations --noinput
+python "$OPENSHIFT_REPO_DIR"wsgi/myproject/manage.py makemigrations --noinput
 python "$OPENSHIFT_REPO_DIR"wsgi/myproject/manage.py migrate --noinput
 
 # GETTING-STARTED: change 'myproject' to your project name:
