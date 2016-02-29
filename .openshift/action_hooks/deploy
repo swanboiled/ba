@@ -17,6 +17,9 @@ echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/myproject/manage.py migrate --n
 
 python "$OPENSHIFT_REPO_DIR"wsgi/myproject/manage.py migrate --noinput
 
+echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/myproject/manage.py createsuperuser --noinput'"
+python "$OPENSHIFT_REPO_DIR"wsgi/myproject/manage.py createsuperuser --noinput
+#
 # GETTING-STARTED: change 'myproject' to your project name:
 echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/myproject/manage.py collectstatic --noinput'"
 # GETTING-STARTED: change 'myproject' to your project name:
