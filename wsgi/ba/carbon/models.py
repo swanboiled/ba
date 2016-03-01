@@ -1,14 +1,15 @@
-from __future__ import unicode_literals
-
 from django.db import models
-
 # Create your models here.
 
 STATUS_CHOICES = (
     ('a', 'Available'),
     ('n', 'Used'),
 )
-
+EXP_CHOICES = (
+    ('l', 'Low rate cycling'),
+    ('h', 'High rate cycling'),
+     ('c', 'Cyclic voltammetry'),
+)
 class Carbon(models.Model):
     sn = models.CharField(max_length=30)
     source = models.CharField(max_length=30)
@@ -77,6 +78,7 @@ class Cell(models.Model):
 class Experiment(models.Model):
     sn = models.CharField(max_length=30)
     cell = models.ForeignKey(Cell)
+    typ= models.CharField(max_length=1, choices=EXP_CHOICES,default='l')
     result = models.FileField(upload_to='uploads/%Y/%m/%d/', default='none')
     comments = models.TextField(default='Leave your comments here')
     pub_date = models.DateTimeField('date produced')
@@ -86,3 +88,4 @@ class Experiment(models.Model):
 
     
 # Create your models here.
+
