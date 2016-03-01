@@ -10,7 +10,7 @@ make_used.short_description = "Mark selected items as used"
 
 class BagAdmin(admin.ModelAdmin):
     list_display = ('sn', 'carbon', 'binder','pub_date','status')
-    search_fields = ('sn', 'carbon', 'binder','pub_date')
+    search_fields = ('sn', 'carbon__sn', 'binder__sn','pub_date')
     list_filter = ('carbon','binder','pub_date','status')
     ordering = ('-pub_date',)
     actions = [make_used]
@@ -31,7 +31,7 @@ class CarbonAdmin(admin.ModelAdmin):
     
 class CellAdmin(admin.ModelAdmin):
     list_display = ('sn', 'anode', 'electrolyte','pub_date')
-    search_fields = ('sn', 'anode', 'electrolyte','pub_date')
+    search_fields = ('sn', 'anode__sn', 'electrolyte__sn','pub_date')
     list_filter = ('anode', 'electrolyte','pub_date')
     #ordering = ('-pub_date',)
 
@@ -45,7 +45,7 @@ class ElectrolyteAdmin(admin.ModelAdmin):
     
 class AnodeAdmin(admin.ModelAdmin):
     list_display = ('sn', 'weight', 'bag','pub_date','status')
-    search_fields = ('sn', 'weight', 'bag','pub_date')
+    search_fields = ('sn', 'weight', 'bag__sn','pub_date')
     list_filter = ('bag','pub_date','status')
     ordering = ('-pub_date',)
     actions = [make_used]
@@ -79,8 +79,6 @@ class ExperimentAdmin(admin.ModelAdmin):
     search_fields =('sn', 'cell__sn','cell__electrolyte__sn', 'cell__anode__bag__carbon__source','cell__anode__bag__carbon__sn','cell__anode__bag__binder__sn','pub_date')
     list_filter =('cell__electrolyte', 'cell__anode__bag__carbon','cell__anode__bag__binder','cell__anode__bag__carbon__source','pub_date')
     ordering = ('-pub_date',)
-
-
 
   
     
