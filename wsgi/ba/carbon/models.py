@@ -78,7 +78,7 @@ class Cell(models.Model):
 class Experiment(models.Model):
     sn = models.CharField(max_length=30)
     cell = models.ForeignKey(Cell)
-    typ= models.CharField(max_length=1, choices=EXP_CHOICES,default='l')
+    experiment_type= models.CharField(max_length=1, choices=EXP_CHOICES,default='l')
     result = models.FileField(upload_to='uploads/%Y/%m/%d/', default='none')
     comments = models.TextField(default='Leave your comments here')
     pub_date = models.DateTimeField('date produced')

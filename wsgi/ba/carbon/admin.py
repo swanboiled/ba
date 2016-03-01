@@ -75,9 +75,9 @@ class ExperimentAdmin(admin.ModelAdmin):
     binder.short_description = 'binder'
     
       
-    list_display = ('sn', 'cell', 'typ','anode','carbon','binder','electrolyte','pub_date')
+    list_display = ('sn', 'cell', 'experiment_type','anode','carbon','binder','electrolyte','pub_date')
     search_fields =('sn', 'cell__sn','cell__electrolyte__sn', 'cell__anode__bag__carbon__source','cell__anode__bag__carbon__sn','cell__anode__bag__binder__sn','pub_date')
-    list_filter =('cell__electrolyte', 'cell__anode__bag__carbon','cell__anode__bag__binder','cell__anode__bag__carbon__source','typ','pub_date')
+    list_filter =('cell__electrolyte', 'cell__anode__bag__carbon','cell__anode__bag__binder','cell__anode__bag__carbon__source','experiment_type','pub_date')
     ordering = ('-pub_date',)
 
 
