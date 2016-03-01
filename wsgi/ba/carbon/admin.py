@@ -77,8 +77,8 @@ class ExperimentAdmin(admin.ModelAdmin):
       
     list_display = ('sn', 'cell', 'anode','carbon','binder','electrolyte','pub_date')
     search_fields =('cell', 'pub_date')
-    list_filter =('sn', 'cell__anode__bag__carbon','pub_date')
-    #ordering = ('-pub_date',)
+    list_filter =('cell__electrolyte', 'cell__anode__bag__carbon','cell__anode__bag__binder','cell__anode__bag__carbon__source','pub_date')
+    ordering = ('-pub_date',)
 
 
 
