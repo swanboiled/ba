@@ -18,35 +18,35 @@ class BagAdmin(admin.ModelAdmin):
 class BinderAdmin(admin.ModelAdmin):
     list_display = ('sn', 'material','pub_date','status')
     search_fields =  ('sn', 'material','pub_date')
-    list_filter =  ('sn', 'material','pub_date','status')
+    list_filter =  ('material','pub_date','status')
     ordering = ('-pub_date',)
     actions = [make_used]
     
 class CarbonAdmin(admin.ModelAdmin):
     list_display = ('sn', 'source','pub_date','status')
     search_fields =  ('sn', 'source','pub_date')
-    list_filter =  ('sn', 'source','pub_date','status')
+    list_filter =  ('source','status','pub_date')
     ordering = ('-pub_date',)
     actions = [make_used]
     
 class CellAdmin(admin.ModelAdmin):
     list_display = ('sn', 'anode', 'electrolyte','pub_date')
     search_fields = ('sn', 'anode', 'electrolyte','pub_date')
-    list_filter = ('sn', 'anode', 'electrolyte','pub_date')
+    list_filter = ('anode', 'electrolyte','pub_date')
     #ordering = ('-pub_date',)
 
     
 class ElectrolyteAdmin(admin.ModelAdmin):
     list_display = ('sn', 'salt', 'solvent','pub_date')
     search_fields = ('sn', 'salt', 'solvent','pub_date')
-    list_filter = ('sn', 'salt', 'solvent','pub_date')
+    list_filter = ('salt', 'solvent','pub_date')
     ordering = ('-pub_date',)
     actions = [make_used]
     
 class AnodeAdmin(admin.ModelAdmin):
     list_display = ('sn', 'weight', 'bag','pub_date','status')
     search_fields = ('sn', 'weight', 'bag','pub_date')
-    list_filter = ('sn', 'weight', 'bag','pub_date','status')
+    list_filter = ('bag','pub_date','status')
     ordering = ('-pub_date',)
     actions = [make_used]
     
@@ -76,7 +76,7 @@ class ExperimentAdmin(admin.ModelAdmin):
     
       
     list_display = ('sn', 'cell', 'anode','carbon','binder','electrolyte','pub_date')
-    search_fields =('sn', 'cell', 'pub_date')
+    search_fields =('cell', 'pub_date')
     list_filter =('sn', 'cell','pub_date')
     #ordering = ('-pub_date',)
 
