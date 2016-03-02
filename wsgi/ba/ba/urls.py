@@ -15,10 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from carbon.admin import carbonadmin
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^ba/', carbonadmin.urls),
+    url(r'^badmin/', admin.site.urls),
 ]
 
