@@ -144,13 +144,12 @@ class ExperimentAdmin(admin.ModelAdmin):
 
   
     
-class BatteryAdmin(AdminSite):
-    site_header = 'BatteryAdmin'
-    site_title='BatteryAdmin'
-    site_url=None
-    index_title='Battery Administration'
-    date_hierarchy = 'pub_date'
-    
+admin.site.site_title="Battery Admin"
+admin.site.index_title="Battery Disciplines"
+admin.site.site_header="Battery Administration"
+admin.site.site_url=None
+
+
 ##admin=BatteryAdmin(name='BatteryAdmin')
 admin.site.register(Carbon,CarbonAdmin)
 admin.site.register(Binder,BinderAdmin)
