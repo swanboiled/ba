@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import models as auth_mod
 # Create your models here.
 
 STATUS_CHOICES = (
@@ -18,6 +19,7 @@ class Carbon(models.Model):
     comments = models.TextField(default='Leave your comments here')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES,default='a')
     pub_date = models.DateTimeField('date produced')
+    author = models.ForeignKey(auth_mod.User, default=1)
     def __str__(self):
         return self.sn
 class Binder(models.Model):
@@ -26,6 +28,7 @@ class Binder(models.Model):
     comments = models.TextField(default='Leave your comments here')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES,default='a')
     pub_date = models.DateTimeField('date produced')
+    author = models.ForeignKey(auth_mod.User, default=1)
     def __str__(self):
         return self.sn
 class Base(models.Model):
@@ -35,6 +38,7 @@ class Base(models.Model):
     comments = models.TextField(default='Leave your comments here')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES,default='a')
     pub_date = models.DateTimeField('date produced')
+    author = models.ForeignKey(auth_mod.User, default=1)
     def __str__(self):
         return self.sn
 class Bag(models.Model):
@@ -45,6 +49,7 @@ class Bag(models.Model):
     comments = models.TextField(default='Leave your comments here')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES,default='a')
     pub_date = models.DateTimeField('date produced')
+    author = models.ForeignKey(auth_mod.User, default=1)
     def __str__(self):
         return u'%s:%s%s'   % (self.sn,self.carbon, self.binder)
 class Anode(models.Model):
@@ -54,6 +59,7 @@ class Anode(models.Model):
     comments = models.TextField(default='Leave your comments here')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES,default='a')
     pub_date = models.DateTimeField('date produced')
+    author = models.ForeignKey(auth_mod.User, default=1)
     def __str__(self):
         return u'%s:%s(%s)' %(self.bag.sn, self.sn,self.weight)
     
@@ -64,6 +70,7 @@ class Electrolyte(models.Model):
     comments = models.TextField(default='Leave your comments here')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES,default='a')
     pub_date = models.DateTimeField('date produced')
+    author = models.ForeignKey(auth_mod.User, default=1)
     def __str__(self):
         return self.sn
     
@@ -73,6 +80,7 @@ class Cell(models.Model):
     electrolyte=models.ForeignKey(Electrolyte)
     comments = models.TextField(default='Leave your comments here')
     pub_date = models.DateTimeField('date produced')
+    author = models.ForeignKey(auth_mod.User, default=1)
     def __str__(self):
         return self.sn
 class Experiment(models.Model):
@@ -82,6 +90,11 @@ class Experiment(models.Model):
     result = models.FileField(upload_to='uploads/%Y/%m/%d/', default='none')
     comments = models.TextField(default='Leave your comments here')
     pub_date = models.DateTimeField('date produced')
+    author = models.ForeignKey(auth_mod.User, default=1)
     def __str__(self):
         return self.sn
+
+
+    
+# Create your models here.
 

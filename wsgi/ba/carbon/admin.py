@@ -14,6 +14,15 @@ class BagAdmin(admin.ModelAdmin):
     list_filter = ('carbon','binder','pub_date','status')
     ordering = ('-pub_date',)
     actions = [make_used]
+    exclude = ('author',)
+    def save_model(self, request, obj, form, change):
+        obj.author = request.user
+        obj.save()
+    def get_queryset(self, request):
+        qs = super(BagAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(author=request.user)
 
 class BinderAdmin(admin.ModelAdmin):
     list_display = ('sn', 'material','pub_date','status')
@@ -21,6 +30,15 @@ class BinderAdmin(admin.ModelAdmin):
     list_filter =  ('material','pub_date','status')
     ordering = ('-pub_date',)
     actions = [make_used]
+    exclude = ('author',)
+    def save_model(self, request, obj, form, change):
+        obj.author = request.user
+        obj.save()
+    def get_queryset(self, request):
+        qs = super(BinderAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(author=request.user)
     
 class CarbonAdmin(admin.ModelAdmin):
     list_display = ('sn', 'source','pub_date','status')
@@ -28,12 +46,30 @@ class CarbonAdmin(admin.ModelAdmin):
     list_filter =  ('source','status','pub_date')
     ordering = ('-pub_date',)
     actions = [make_used]
+    exclude = ('author',)
+    def save_model(self, request, obj, form, change):
+        obj.author = request.user
+        obj.save()
+    def get_queryset(self, request):
+        qs = super(CarbonAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(author=request.user)
     
 class CellAdmin(admin.ModelAdmin):
     list_display = ('sn', 'anode', 'electrolyte','pub_date')
     search_fields = ('sn', 'anode__sn', 'electrolyte__sn','pub_date')
     list_filter = ('anode', 'electrolyte','pub_date')
-    #ordering = ('-pub_date',)
+    ordering = ('-pub_date',)
+    exclude = ('author',)
+    def save_model(self, request, obj, form, change):
+        obj.author = request.user
+        obj.save()
+    def get_queryset(self, request):
+        qs = super(CellAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(author=request.user)
 
     
 class ElectrolyteAdmin(admin.ModelAdmin):
@@ -42,14 +78,30 @@ class ElectrolyteAdmin(admin.ModelAdmin):
     list_filter = ('salt', 'solvent','pub_date')
     ordering = ('-pub_date',)
     actions = [make_used]
-    
+    exclude = ('author',)
+    def save_model(self, request, obj, form, change):
+        obj.author = request.user
+        obj.save()
+    def get_queryset(self, request):
+        qs = super(ElectrolyteAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(author=request.user)
 class AnodeAdmin(admin.ModelAdmin):
     list_display = ('sn', 'weight', 'bag','pub_date','status')
     search_fields = ('sn', 'weight', 'bag__sn','pub_date')
     list_filter = ('bag','pub_date','status')
     ordering = ('-pub_date',)
     actions = [make_used]
-    
+    exclude = ('author',)
+    def save_model(self, request, obj, form, change):
+        obj.author = request.user
+        obj.save()
+    def get_queryset(self, request):
+        qs = super(AnodeAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(author=request.user)
 
 
 class ExperimentAdmin(admin.ModelAdmin):
@@ -79,7 +131,15 @@ class ExperimentAdmin(admin.ModelAdmin):
     search_fields =('sn', 'cell__sn','cell__electrolyte__sn', 'cell__anode__bag__carbon__source','cell__anode__bag__carbon__sn','cell__anode__bag__binder__sn','pub_date')
     list_filter =('cell__electrolyte', 'cell__anode__bag__carbon','cell__anode__bag__binder','cell__anode__bag__carbon__source','experiment_type','pub_date')
     ordering = ('-pub_date',)
-
+    exclude = ('author',)
+    def save_model(self, request, obj, form, change):
+        obj.author = request.user
+        obj.save()
+    def get_queryset(self, request):
+        qs = super(ExperimentAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(author=request.user)
 
 
   
