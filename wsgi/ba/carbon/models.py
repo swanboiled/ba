@@ -85,7 +85,3 @@ class Experiment(models.Model):
     def __str__(self):
         return self.sn
 
-
-    
-# Create your models here.
-
