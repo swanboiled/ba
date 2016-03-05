@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.contrib.admin import AdminSite
+
 
 # Register your models here.
 from .models import Carbon, Binder, Bag, Anode, Cell, Electrolyte, Experiment,Base
@@ -52,6 +52,21 @@ class CarbonAdmin(admin.ModelAdmin):
         obj.save()
     def get_queryset(self, request):
         qs = super(CarbonAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(author=request.user)
+class BaseAdmin(admin.ModelAdmin):
+    list_display = ('sn', 'metal','pub_date','status')
+    search_fields =  ('sn', 'metal','pub_date')
+    list_filter =  ('metal',)
+    ordering = ('-pub_date',)
+    actions = [make_used]
+    exclude = ('author',)
+    def save_model(self, request, obj, form, change):
+        obj.author = request.user
+        obj.save()
+    def get_queryset(self, request):
+        qs = super(BaseAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
         return qs.filter(author=request.user)
@@ -144,11 +159,11 @@ class ExperimentAdmin(admin.ModelAdmin):
 
   
     
+
 admin.site.site_title="Battery Admin"
 admin.site.index_title="Battery Disciplines"
 admin.site.site_header="Battery Administration"
 admin.site.site_url=None
-
 
 ##admin=BatteryAdmin(name='BatteryAdmin')
 admin.site.register(Carbon,CarbonAdmin)
@@ -157,5 +172,5 @@ admin.site.register(Bag, BagAdmin)
 admin.site.register(Cell,CellAdmin)
 admin.site.register(Electrolyte,ElectrolyteAdmin)
 admin.site.register(Experiment,ExperimentAdmin)
-admin.site.register(Base)
+admin.site.register(Base,BaseAdmin)
 admin.site.register(Anode,AnodeAdmin)
